@@ -38,12 +38,12 @@ userSchema.pre('save', function (next) {
       }
 
       // On hash le mot de passe avec le "sel", puis on le remplace dans le user que l'on va sauvegarder
-      bcrypt.hash(this.password, salt, (error, hash) => {
+      bcrypt.hash(user.password, salt, (error, hash) => {
         if (error) {
           throw new Error(error)
         }
 
-        this.password = hash
+        user.password = hash
 
         return next()
       })
