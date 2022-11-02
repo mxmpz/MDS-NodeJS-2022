@@ -31,6 +31,8 @@ app.use('/users/{id}', require('./routes/users'))
 
 app.use('/auth', require('./routes/auth'))
 
+app.use('/protected', require('./routes/protected'))
+
 // On importe le logger
 const logger = require('./middlewares/logger')
 // On dit à Express d'utiliser le logger en tant que middleware
