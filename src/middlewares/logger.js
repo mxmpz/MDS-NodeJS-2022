@@ -6,13 +6,13 @@
  */
 
 const loggerMiddleware = (req, res, next) => {
-    if(req) {
-        //Ancienne méthode
-        //console.info('[' + new Date().toLocaleString() + '] Request' + req.method + 'from' + req.ip + ' to ' + req.url)
-        //Nouvelle méthode
-        console.info(`[${new Date().toLocaleString()}] Requet ${req.method} from ${req.ip} to ${req.url}`)
-    }
-    next()
+  if (req) {
+    // Ancienne méthode
+    // console.info('[' + new Date().toLocaleString() + '] Request' + req.method + 'from' + req.ip + ' to ' + req.url)
+    // Nouvelle méthode
+    console.info(`[${new Date().toLocaleString()}] Requet ${req.method} from ${req.ip} to ${req.url}`)
+  }
+  next()
 }
 
 module.exports = loggerMiddleware
