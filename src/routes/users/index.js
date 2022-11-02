@@ -16,10 +16,17 @@ router.route('/:id')
     if(!params.id){
         return res.status(400).send('Missing ID')
     }
-    //On récupère l'utilisateur dans la base de donnée
-    const user = await User.findById(params.id).select('-password')
-    const userObject = user.toObject()
-    return res.send(userObject)
+
+    try {
+        //On récupère l'utilisateur dans la base de donnée
+        const user = await User.findById(params.id).select('-password')
+        const userObject = user.toObject()
+        return res.send(userObject)  
+    } catch (error) {
+        console.error(error)
+        return res.statuts(500).send(error)
+    }
+    
 })
   
 
@@ -57,6 +64,7 @@ router.route('/:id')
         
     } catch (error) {
         //En cas d'erreur, on renvoit une erreur 500 + detail dans la réponse
+        console.error(error)
         return res.statuts(500).send(error)
     }
 
