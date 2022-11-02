@@ -2,14 +2,25 @@ const User = require('../../data/models/User')
 
 const router = require('express').Router()
 
-// router.route('/')
-// router.route('/:id')
 
-.get('/', async (req, res)=>{
+router.route('/')
+.get(async (req, res)=>{
     const users = await User.find().select('-password')
     return res.send(users)
 })
 
+router.route('/:id')
+.get(async(req, res)=>{
+    // On récupère  les paramètres
+    const params = req.params
+    if(!params.id){
+        return res.status(400).send('Missing ID')
+    }
+    //On récupère l'utilisateur dans la base de donnée
+    const user = await User.findById(params.id).select('-password')
+    const userObject = user.toObject()
+    return res.send(userObject)
+})
   
 
 //Create a user
@@ -57,10 +68,4 @@ const router = require('express').Router()
 
 // .deleate
 // .update
-// .get('/:id', async(req, res)=>{
-//     const id = parseInt(req.params.id)
-//     const user = await User.find(user => user.id === id)
-//     return res.status(200).json(user)
-// })
-
 module.exports = router
