@@ -24,7 +24,7 @@ router.route('/:id')
         return res.send(userObject)  
     } catch (error) {
         console.error(error)
-        return res.statuts(500).send(error)
+        return res.status(500).send(error)
     }
     
 })
@@ -65,7 +65,7 @@ router.route('/:id')
     } catch (error) {
         //En cas d'erreur, on renvoit une erreur 500 + detail dans la réponse
         console.error(error)
-        return res.statuts(500).send(error)
+        return res.status(500).send(error)
     }
 
     // user.save()
@@ -74,6 +74,32 @@ router.route('/:id')
 
 })
 
-// .deleate
-// .update
+.patch(async(req, res)=>{
+    const params = req.params
+    const user = req.body
+
+    //On verifie la présence de l'id dans l'URL
+    if(!params.id){
+        return res.status(400).send('Missing ID')
+    }
+
+    //On verifie la présence d'un body dans la requête
+    if(!user){
+        return res.status(400).send('Missing user')
+    }
+
+    try {
+        //On met à jour l'utilisateur via la méthode mongoose findByAndUpdate
+        const userUpadted = await User.findByIdAndUpdate(params.id, user, {new: true})
+        const userObject = userUpadted.toObject()
+        return res.send(userObject)  
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send(error)
+    }
+
+})
+
+
 module.exports = router
