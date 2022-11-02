@@ -17,7 +17,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: /.+\@.+\..+/
+    match: /.+@.+\..+/
   },
   password: {
     type: String,
@@ -29,7 +29,6 @@ const userSchema = new Schema({
 userSchema.pre('save', function (next) {
   // On recupere le user au travers du contexte "this"
   const user = this
-
   // On regarde qi le mot de passe à changer ou si l'utilisateur est nouveau
   if (this.isModified('password') || this.isNew) {
     // On genere tu "sel" = une clef aleatoire pour hasher le mot de passe
