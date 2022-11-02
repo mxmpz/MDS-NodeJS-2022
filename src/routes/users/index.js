@@ -90,9 +90,29 @@ router.route('/:id')
 
     try {
         //On met à jour l'utilisateur via la méthode mongoose findByAndUpdate
-        const userUpadted = await User.findByIdAndUpdate(params.id, user, {new: true})
+        const userUpadted = await User.findByIdAndUpdate(params.id, user, {new: true}).select('-password')
         const userObject = userUpadted.toObject()
         return res.send(userObject)  
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send(error)
+    }
+
+})
+
+.delete(async(req, res)=>{
+    const params = req.params
+
+    //On verifie la présence de l'id dans l'URL
+    if(!params.id){
+        return res.status(400).send('Missing ID')
+    }
+
+    try {
+        //On supprime l'utilisateur via la méthode mongoose findByAndDelete
+        await User.findByIdAndDelete(params.id)
+        return res.send(`User with ID ${params.id} as been deleted`)
 
     } catch (error) {
         console.error(error)
