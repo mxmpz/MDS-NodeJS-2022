@@ -34,3 +34,5 @@ router.route('/login')
       res.status(500).send('Invalid crednetials')
     }
   })
+
+module.exports = router
