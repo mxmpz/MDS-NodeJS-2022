@@ -1,4 +1,5 @@
 const User = require('../../data/models/User')
+const jwt = require('jsonwebtoken')
 
 const router = require('express').Router()
 
@@ -20,13 +21,24 @@ router.route('/login')
 
       user.comparePassword(credentials.password, (error, isMatch) => {
         if (error) {
-          return res.status(403).send('Invalid credentials')
+          return res.status(500).send('Invalid credentials')
         }
 
         if (isMatch) {
-          console.log('OK')
+          const payload = {
+            id: user.id
+          }
+          jwt.sign(payload, 'MON SUPER MOT DE PASSE SECRET', { expiresIn: '7d' }, (error, token) => {
+            if (error) {
+              return res.status(500).send('Invalid credentials')
+            }
+            return res.send({
+              user,
+              token
+            })
+          })
         } else {
-          console.log('KO')
+          return res.status(403).send('Invalid credentials')
         }
       })
     } catch (error) {
