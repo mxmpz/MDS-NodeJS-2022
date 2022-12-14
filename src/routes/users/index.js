@@ -1,9 +1,9 @@
 const { getUsers, createUser, getUserByID, updateUserById, deleteUserById } = require('../../controllers/users.controller')
-
+const withAuth = require('../../middlewares/auth')
 const router = require('express').Router()
 
 router.route('/')
-  .get(async (req, res) => {
+  .get(withAuth, async (req, res) => {
     const users = await getUsers()
     return res.send(users)
   })
