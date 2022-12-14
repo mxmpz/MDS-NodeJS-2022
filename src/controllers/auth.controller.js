@@ -35,6 +35,7 @@ const loginUser = async (credentials, callback) => {
       throw new Error('Invalid credentials')
     }
     if (error) {
+      console.error(error)
       throw new Error('Invalid credentials')
     }
   })

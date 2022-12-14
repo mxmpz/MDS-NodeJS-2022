@@ -5,7 +5,8 @@ router.route('/login')
   .post(async (req, res) => {
     const credentials = req.body
     try {
-      loginUser(credentials, (result) => {
+      loginUser(credentials, (error, result) => {
+        console.error(error)
         return res.send(result)
       })
     } catch (error) {
