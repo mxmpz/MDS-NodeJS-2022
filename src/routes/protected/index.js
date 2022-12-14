@@ -5,7 +5,7 @@ router.route('/')
   .get((req, res) => {
     const headers = req.headers
     console.log(headers)
-    const decoded = jwt.verify(req.headers.authorization.split(' ')[1], 'MON SUPER MOT DE PASSE SECRET')
+    const decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.TOKEN_SECRET)
     console.log(decoded)
     return res.send('COUCOU')
   })

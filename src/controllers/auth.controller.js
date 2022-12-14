@@ -19,7 +19,7 @@ const loginUser = async (credentials, callback) => {
       const payload = {
         id: user.id
       }
-      jwt.sign(payload, 'MON SUPER MOT DE PASSE SECRET', { expiresIn: '7d' }, (error, token) => {
+      jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '7d' }, (error, token) => {
         if (error) {
           _error = 'Invalid credentials'
         }
