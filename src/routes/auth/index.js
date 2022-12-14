@@ -32,6 +32,10 @@ router.route('/login')
             if (error) {
               return res.status(500).send('Invalid credentials')
             }
+
+            const _user = user.toObject()
+            delete _user.password
+
             return res.send({
               user,
               token
