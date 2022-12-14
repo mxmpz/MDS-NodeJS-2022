@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../data/models/User')
 
-const loginUser = async (credentials) => {
+const loginUser = async (credentials, callback) => {
   // Je vérifie la présence des paramètres
   if (!credentials.email || !credentials.password) {
     throw new Error('Invalid credentials')
@@ -26,10 +26,10 @@ const loginUser = async (credentials) => {
         const _user = user.toObject()
         delete _user.password
         // On retourne l'utilisateur et le token
-        return {
+        return callback(error, {
           user,
           token
-        }
+        })
       })
     } else {
       throw new Error('Invalid credentials')
