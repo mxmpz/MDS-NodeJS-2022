@@ -6,7 +6,9 @@ router.route('/login')
     const credentials = req.body
     try {
       loginUser(credentials, (error, result) => {
-        console.error(error)
+        if (error) {
+          return res.status(500).send(error)
+        }
         return res.send(result)
       })
     } catch (error) {
