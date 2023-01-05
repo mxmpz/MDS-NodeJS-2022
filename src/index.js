@@ -19,6 +19,7 @@ app.use('/users/{id}', require('./routes/users'))
 app.use('/auth', require('./routes/auth'))
 
 app.use('/protected', require('./routes/protected'))
+app.use('/protected', require('./routes/files/upload'))
 
 // On importe le logger
 const logger = require('./middlewares/logger')
