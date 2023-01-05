@@ -9,9 +9,9 @@ const createFile = async (file, userId) => {
   }
 
   const newfile = new File({
-    fileName: file.fileName,
-    originalName: file.originalName,
-    mimeType: file.mimeType,
+    fileName: file.filename,
+    originalName: file.originalname,
+    mimeType: file.mimetype,
     path: file.path,
     size: file.size,
     user: userId
