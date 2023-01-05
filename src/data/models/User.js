@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
-const File = require('../data/models/Files')
+const File = require('../models/Files')
 // identique à const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs')
 
@@ -55,14 +55,14 @@ userSchema.pre('save', function (next) {
     })
   }
 })
-
-userSchema.pre('remove', function (next) {
+/*
+userSchema.pre('findByIdAndDelete', function (next) {
   const user = this
 
   File.remove({ user: user._id }).exec()
   next()
 })
-
+*/
 userSchema.methods.comparePassword = function (password, callback) {
   bcrypt.compare(password, this.password, (error, isMatch) => {
     if (error) {
