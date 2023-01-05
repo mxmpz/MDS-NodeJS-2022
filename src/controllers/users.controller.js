@@ -1,4 +1,5 @@
 const User = require('../data/models/User')
+const File = require('../data/models/Files')
 
 const getUsers = async () => {
   const users = await User.find().select('-password')
@@ -64,7 +65,7 @@ const deleteUserById = async (id) => {
   if (!id) {
     throw new Error('Missing ID')
   }
-
+  await File.remove({ user: id }).exec()
   await User.findByIdAndDelete(id)
 }
 
