@@ -37,7 +37,7 @@ const getUserByID = async (id) => {
   }
 
   // On récupère l'utilisateur dans la base de donnée
-  const user = await User.findById(id).select('-password')
+  const user = await User.findById(id).select('-password').populate('files')
   const userObject = user.toObject()
   return userObject
 }

@@ -29,18 +29,6 @@ const createFile = async (file, userId) => {
   return savedFileObject
 }
 
-/* const downloadFileByID = async (id) => {
-  if (!id) {
-    throw new Error('Missing ID')
-  }
-
-  // On récupère l'utilisateur dans la base de donnée
-  const file = await File.findById(id)
-  const fileObject = file.toObject()
-  return fileObject
-} */
-
 module.exports = {
-  createFile/*,
-  downloadFileByID */
+  createFile
 }
