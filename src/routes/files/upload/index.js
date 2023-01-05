@@ -5,7 +5,7 @@ const appDir = dirname(require.main.filename)
 const { sanatizeFilename } = require('../../../tools/strings')
 
 const multer = require('multer')
-const { createFile } = require('../../../controllers/filesController')
+const { createFile } = require('../../../controllers/files.controller')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
