@@ -9,3 +9,14 @@ const storage = multer.diskStorage({
     cb(null, file.originalname + '_' + uniqueSuffix)
   }
 })
+
+const upload = multer({ storage })
+
+router.route('/')
+  .post(upload.single('file'), (req, res) => {
+    console.log(req.file)
+    console.log(req.body)
+    return res.send('OK')
+  })
+
+module.exports = router
