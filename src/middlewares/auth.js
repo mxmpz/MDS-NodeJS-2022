@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const withAuth = (req, res, next) => {
-  if (req.headers.autorization) {
+  if (req.headers.authorization) {
     try {
       const decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.TOKEN_SECRET)
       if (decoded && decoded.id) {
