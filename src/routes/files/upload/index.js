@@ -4,11 +4,11 @@ const appDir = dirname(require.main.filename)
 const multer = require('multer')
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, appDir + '/files/')
+    cb(null, appDir + '/../files/')
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '_' + Math.round(Math.random() * 1E9)
-    cb(null, file.originalname + '_' + uniqueSuffix)
+    cb(null, uniqueSuffix + '_' + file.originalname)
   }
 })
 
