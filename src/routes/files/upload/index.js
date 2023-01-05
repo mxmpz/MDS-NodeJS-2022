@@ -35,7 +35,7 @@ const upload = multer({
       cb(null, true)
     } else {
       cb(null, false)
-      return cb(new Error('File type must be ' + JSON.stringify(authorizedTypes)))
+      return cb(new Error('File type must be ' + authorizedTypes))
     }
   }
 })
