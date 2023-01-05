@@ -22,17 +22,21 @@ router.route('/')
 router.route('/:id')
   .get(withAuth, async (req, res) => {
     const { id } = req.params
-
-    const file = await File.findById(id)
-    if (file) {
-      const fileObject = file.toObject()
-      if (fileObject.user.equals(req.userId)) {
-        return res.send(fileObject)
+    try {
+      const file = await File.findById(id)
+      if (file) {
+        const fileObject = file.toObject()
+        if (fileObject.user.equals(req.userId)) {
+          return res.send(fileObject)
+        } else {
+          return res.status(402).send('You are not authorized to access this file')
+        }
       } else {
-        return res.status(402).send('You are not authorized to access this file')
+        return res.status(404).send('File not found')
       }
-    } else {
-      return res.status(404).send('File not found')
+    } catch (error) {
+      console.error(error)
+      return res.status(500).send(error)
     }
   })
 
