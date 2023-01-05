@@ -1,5 +1,5 @@
 const User = require('../data/models/User')
-const File = require('../data/models/Files')
+const File = require('../data/models/File')
 
 const getUsers = async () => {
   const users = await User.find().select('-password')

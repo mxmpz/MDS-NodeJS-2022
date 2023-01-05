@@ -1,4 +1,4 @@
-const File = require('../data/models/Files')
+const File = require('../data/models/File')
 const User = require('../data/models/User')
 
 const createFile = async (file, userId) => {
