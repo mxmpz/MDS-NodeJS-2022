@@ -1,8 +1,11 @@
 const router = require('express').Router()
 const { dirname } = require('path')
 const appDir = dirname(require.main.filename)
-const multer = require('multer')
+
 const { sanatizeFilename } = require('../../../tools/strings')
+
+const multer = require('multer')
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, appDir + '/../files/')
