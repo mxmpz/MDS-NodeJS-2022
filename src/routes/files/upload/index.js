@@ -6,6 +6,7 @@ const { sanatizeFilename } = require('../../../tools/strings')
 
 const multer = require('multer')
 const { createFile } = require('../../../controllers/files.controller')
+const withAuth = require('../../../middlewares/auth')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -41,9 +42,9 @@ const upload = multer({
 })
 
 router.route('/')
-  .post(upload.single('file'), async (req, res) => {
-    const userId = '63626fa14a3a562fd618221a'
-    const { file } = req
+  .post(withAuth, upload.single('file'), async (req, res) => {
+    console.log(req.userId)
+    const { file, userId } = req
     try {
       const savedFileObject = await createFile(file, userId)
       return res.send(savedFileObject)
