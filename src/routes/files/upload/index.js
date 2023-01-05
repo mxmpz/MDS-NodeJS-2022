@@ -17,7 +17,28 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage })
+const authorizedTypes = [
+  'png',
+  'jpeg',
+  'jpg',
+  'gif',
+  'webp',
+  'webm',
+  'pdf'
+]
+
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const type = file.mimetype.split('/')[1]
+    if (authorizedTypes.includes(type)) {
+      cb(null, true)
+    } else {
+      cb(null, false)
+      return cb(new Error('File type must be ' + JSON.stringify(authorizedTypes)))
+    }
+  }
+})
 
 router.route('/')
   .post(upload.single('file'), async (req, res) => {
