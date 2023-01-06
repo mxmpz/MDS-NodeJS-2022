@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const helmet = require('helmet')
+const cors = require('cors')
 const app = express()
 const port = 3000
 
@@ -10,6 +11,7 @@ const connect = require('./data/helpers/db')
 connect()
 
 app.use(helmet())
+app.use(cors())
 // Paramétrage de Express pour le body et le JSON
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
